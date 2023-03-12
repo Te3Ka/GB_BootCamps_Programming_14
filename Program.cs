@@ -5,7 +5,7 @@
     {
         for (int j = 0; j < columns; j++)
         {
-            result[i, j] = Random.Shared.Next(1, 5);
+            result[i, j] = Random.Shared.Next(1, 100);
         }
     }
     return result;
@@ -70,12 +70,19 @@ double[,] MultiplyParallel(double[,] m1, double[,] m2)
     return result;
 }
 
-int n = 4;
+int n = 1000;
 var m1 = GenerateMatrix(n, n);
-PrintMatrix(m1);
+//PrintMatrix(m1);
 var m2 = GenerateMatrix(n, n);
-PrintMatrix(m2);
+//PrintMatrix(m2);
+DateTime s = DateTime.Now;
 var mSync = MultiplySync(m1, m2);
-PrintMatrix(mSync);
+DateTime e = DateTime.Now;
+Console.WriteLine((e - s).TotalMilliseconds);
+//PrintMatrix(mSync);
+
+s = DateTime.Now;
 var mParallel = MultiplyParallel(m1, m2);
-PrintMatrix(mParallel);
+e = DateTime.Now;
+Console.WriteLine((e - s).TotalMilliseconds);
+//PrintMatrix(mParallel);
